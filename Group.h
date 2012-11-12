@@ -17,11 +17,12 @@ class Group:public Object3D
 public:
 
   Group(){
-
+	  n_objects = 0;
   }
 	
-  Group( int num_objects ){
-
+	Group( int num_objects ){
+	  n_objects = num_objects;
+	  objects = new Object3D*[num_objects];
   }
 
   ~Group(){
@@ -29,18 +30,27 @@ public:
   }
 
   virtual bool intersect( const Ray& r , Hit& h , float tmin ) {
-		
-   }
+	  bool output = false;
+	  for (int i=0; i<n_objects; i++) {
+		  if (objects[i]->intersect(r,h,tmin)) {
+			  output = true;
+		  }
+	  }
+	  return output;
+  }
 	
   void addObject( int index , Object3D* obj ){
-
+	  objects[index] = obj;
   }
 
   int getGroupSize(){ 
-  
+	  return n_objects;
   }
 
  private:
+	
+	int n_objects;
+	Object3D** objects;
 
 };
 
