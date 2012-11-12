@@ -48,11 +48,11 @@ public:
 				if ( t_1 < t_2 )
 				{
 					Vector3f N = (r.pointAtParameter(t_1)-ctr).normalized();
-					h.set(t_1,this->material,N);
+					h.set(t_1,material,N);
 					return true;
 				} else {
 					Vector3f N = (r.pointAtParameter(t_2)-ctr).normalized();
-					h.set(t_2,this->material,N);
+					h.set(t_2,material,N);
 					return true;
 				}
 			}
