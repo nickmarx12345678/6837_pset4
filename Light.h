@@ -19,7 +19,7 @@ public:
 
     }
 
-    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const = 0;
+    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col) const = 0;
 
 };
 
@@ -39,7 +39,7 @@ public:
     }
   ///@param p unsed in this function
   ///@param distanceToLight not well defined because it's not a point light
-    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const
+    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col) const
     {
         // the direction to the light is the opposite of the
         // direction of the directional light source
@@ -71,7 +71,7 @@ public:
 
     }
 
-    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col, float& distanceToLight ) const
+    virtual void getIllumination( const Vector3f& p, Vector3f& dir, Vector3f& col) const
     {
         // the direction to the light is the opposite of the
         // direction of the directional light source

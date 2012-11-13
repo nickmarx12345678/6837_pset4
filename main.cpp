@@ -59,7 +59,6 @@ int main( int argc, char* argv[] )
 				
 				Material* material = hit.getMaterial();
 				Vector3f colour = ambientLight*material->getDiffuseColor();				
-				image.SetPixel(i,j,colour);
 				
 				for (int k=0; k<parser.getNumLights(); k++) {
 					//Add diffuse shading
@@ -67,10 +66,14 @@ int main( int argc, char* argv[] )
 					Light* l = parser.getLight(k);
 					
 					Vector3f light_vec; Vector3f light_col;
-					l->getIllumination(position,light_vec,light_col, 0.0);
+					l->getIllumination(position,light_vec,light_col);
+					
 					
 					colour = colour + clampedDepth(Vector3f::dot(light_vec,hit.getNormal()),0.0,1.0)*light_col*material->getDiffuseColor();
 				}
+				
+				image.SetPixel(i,j,colour);
+
 			}
 		}
 	}
