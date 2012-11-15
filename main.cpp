@@ -30,13 +30,31 @@ int main( int argc, char* argv[] )
   // argNum is initialized to 1 because the first
   // "argument" provided to the program is actually the
   // name of the executable (in our case, "a4").
-//	for ( int argNum = 1; argNum < argc; ++argNum )
-//	{
-//		std::cout << "Argument " << argNum << " is: " << argv[argNum] << std::endl;
-//	}
-	//do params here
-	SceneParser parser = SceneParser("scene03_sphere.txt");
+
+	//initialize command line inps
+	char *in_file = NULL;
+	char *out_file = NULL;
 	int height = 200; int width = 200;
+	
+	
+	//do params here
+	for (int i=1; i<argc; i++) {
+		if (!strcmp(argv[i], "-input")) {
+			in_file = argv[++i];
+			cout << "Input file: " << in_file << "\n";
+		}
+		else if (!strcmp(argv[i],"-size")) {
+			width = atoi(argv[++i]);
+			height = atoi(argv[++i]);
+			cout << "width: " << width << "\n";
+			cout << "height: " << height << "\n";
+		}
+		else if (!strcmp(argv[i], "-output")) {
+			out_file = argv[++i];
+			cout << "output file: " << out_file << "\n";
+		}
+	}
+	SceneParser parser = SceneParser(in_file);
 	
 	Camera* camera = parser.getCamera();
 	Group* group = parser.getGroup();
@@ -91,7 +109,7 @@ int main( int argc, char* argv[] )
 	///Should be removed when you start
 	Vector3f pixelColor (1.0f,0,0);
 	
-	image.SaveImage("pat.bmp");
+	image.SaveImage(out_file);
 	return 0;
 }
 
