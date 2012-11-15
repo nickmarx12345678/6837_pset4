@@ -36,8 +36,7 @@ int main( int argc, char* argv[] )
 	char *out_file = NULL;
 	int height = 200; int width = 200;
 	
-	
-	//do params here
+	//parse command line args
 	for (int i=1; i<argc; i++) {
 		if (!strcmp(argv[i], "-input")) {
 			in_file = argv[++i];
@@ -54,6 +53,8 @@ int main( int argc, char* argv[] )
 			cout << "output file: " << out_file << "\n";
 		}
 	}
+	
+	
 	SceneParser parser = SceneParser(in_file);
 	
 	Camera* camera = parser.getCamera();
